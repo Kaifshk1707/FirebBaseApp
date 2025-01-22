@@ -12,7 +12,7 @@ import MyButtons from "../components/MyButtons";
 import MyTextInput from "../components/MyTextInput";
 import SocialMedia from "../components/SocialMedia";
 
-const LoginScreen = ({ navigation }) => {
+const SignUpScreen = ({ navigation }) => {
   return (
     <View>
       <ImageBackground
@@ -54,6 +54,7 @@ const LoginScreen = ({ navigation }) => {
         >
           <MyTextInput placeholder="Enter Email or User name" />
           <MyTextInput placeholder="Password" secureTextEntry />
+          <MyTextInput placeholder="Confirm Password" secureTextEntry />
           <TouchableOpacity
             style={{ alignSelf: "flex-end" }}
             onPress={() => navigation.navigate("SignUpScreen")}
@@ -70,9 +71,10 @@ const LoginScreen = ({ navigation }) => {
               Don't have an account yet?
             </Text>
           </TouchableOpacity>
+
           <MyButtons
-            onPress={() => navigation.navigate("HomePage")}
-            title={"Login"}
+            onPress={() => navigation.navigate("LoginScreen")}
+            title={"Sign Up"}
           />
           <Text
             style={{
@@ -91,6 +93,6 @@ const LoginScreen = ({ navigation }) => {
   );
 };
 
-export default LoginScreen;
+export default SignUpScreen;
 
 const styles = StyleSheet.create({});
