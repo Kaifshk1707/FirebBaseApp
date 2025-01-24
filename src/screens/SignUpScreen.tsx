@@ -6,13 +6,38 @@ import {
   View,
   Text,
   TouchableOpacity,
+  Alert,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import MyButtons from "../components/MyButtons";
 import MyTextInput from "../components/MyTextInput";
 import SocialMedia from "../components/SocialMedia";
+import auth from "@react-native-firebase/auth";
 
 const SignUpScreen = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const signupTestFn = () => {
+    auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((res) => {
+        console.log(res);
+        Alert.alert(
+          "User created with those credentials Please login " + email
+        );
+        navigation.navigate("LoginScreen");
+      })
+      .catch((err) => {
+        console.log("Error creating user:", err);
+        const errorMessage =
+          err?.nativeErrorMessage ||
+          "Enter a valid password. Please try again.";
+        Alert.alert("Signup Error", errorMessage);
+      });
+  };
+
   return (
     <View>
       <ImageBackground
@@ -52,9 +77,23 @@ const SignUpScreen = ({ navigation }) => {
             paddingHorizontal: 20,
           }}
         >
-          <MyTextInput placeholder="Enter Email or User name" />
-          <MyTextInput placeholder="Password" secureTextEntry />
-          <MyTextInput placeholder="Confirm Password" secureTextEntry />
+          <MyTextInput
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+            placeholder="Enter Email or User name"
+          />
+          <MyTextInput
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+            placeholder="Password"
+            secureTextEntry
+          />
+          <MyTextInput
+            value={confirmPassword}
+            onChangeText={(text) => setConfirmPassword(text)}
+            placeholder="Confirm Password"
+            secureTextEntry
+          />
           <TouchableOpacity
             style={{ alignSelf: "flex-end" }}
             onPress={() => navigation.navigate("SignUpScreen")}
@@ -73,8 +112,9 @@ const SignUpScreen = ({ navigation }) => {
           </TouchableOpacity>
 
           <MyButtons
-            onPress={() => navigation.navigate("LoginScreen")}
+            // onPress={() => navigation.navigate("LoginScreen")}
             title={"Sign Up"}
+            onPress={signupTestFn}
           />
           <Text
             style={{

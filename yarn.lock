@@ -1786,6 +1786,13 @@
   dependencies:
     firebase "10.13.2"
 
+"@react-native-firebase/auth@^21.7.1":
+  version "21.7.1"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-21.7.1.tgz#54791f6c3f9504dd8550d16feacb0fce6575337b"
+  integrity sha512-aJ7e2xZvEupOsTk4dM8XwQUErJOn9NzA9ghCTN8ypkLAyOguGOdt/WSIQxAn/8o8xxPd5XSPyVkGDEvlhpIgDw==
+  dependencies:
+    plist "^3.1.0"
+
 "@react-native/assets-registry@0.76.6":
   version "0.76.6"
   resolved "https://registry.yarnpkg.com/@react-native/assets-registry/-/assets-registry-0.76.6.tgz#649af8a19cbabcea321dbcfb1a1ae04bb298d958"
@@ -5054,7 +5061,7 @@ pkg-dir@^3.0.0:
   dependencies:
     find-up "^3.0.0"
 
-plist@^3.0.5:
+plist@^3.0.5, plist@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/plist/-/plist-3.1.0.tgz#797a516a93e62f5bde55e0b9cc9c967f860893c9"
   integrity sha512-uysumyrvkUX0rX/dEVqt8gC3sTBzd4zoWfLeS29nb53imdaXVvLINYXTI2GNqzaMuvacNx4uJQ8+b3zXR0pkgQ==

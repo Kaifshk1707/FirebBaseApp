@@ -6,13 +6,33 @@ import {
   View,
   Text,
   TouchableOpacity,
+  Alert,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import MyButtons from "../components/MyButtons";
 import MyTextInput from "../components/MyTextInput";
+import HomeScreen from "./HomeScreen";
 import SocialMedia from "../components/SocialMedia";
+import auth from "@react-native-firebase/auth";
 
 const LoginScreen = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const LoginTestFn = () => {
+    auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((res) => {
+        console.log(res);
+        Alert.alert("Success: logged in ");
+        navigation.navigate("HomeScreen");
+      })
+      .catch((err) => {
+        console.log(err);
+        Alert.alert(err.nativeErrorMessage);
+      });
+  };
+
   return (
     <View>
       <ImageBackground
@@ -52,8 +72,17 @@ const LoginScreen = ({ navigation }) => {
             paddingHorizontal: 20,
           }}
         >
-          <MyTextInput placeholder="Enter Email or User name" />
-          <MyTextInput placeholder="Password" secureTextEntry />
+          <MyTextInput
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+            placeholder="Enter Email or User name"
+          />
+          <MyTextInput
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+            placeholder="Password"
+            secureTextEntry
+          />
           <TouchableOpacity
             style={{ alignSelf: "flex-end" }}
             onPress={() => navigation.navigate("SignUpScreen")}
@@ -70,10 +99,7 @@ const LoginScreen = ({ navigation }) => {
               Don't have an account yet?
             </Text>
           </TouchableOpacity>
-          <MyButtons
-            onPress={() => navigation.navigate("HomePage")}
-            title={"Login"}
-          />
+          <MyButtons onPress={LoginTestFn} title={"Login"} />
           <Text
             style={{
               fontSize: 20,
