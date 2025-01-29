@@ -1793,6 +1793,21 @@
   dependencies:
     plist "^3.1.0"
 
+"@react-native-firebase/firestore@^21.7.1":
+  version "21.7.1"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-21.7.1.tgz#69292bfdfdfa8ec48a04718fe57227571146e875"
+  integrity sha512-tW1nfya6q/OK0KvQv3/6dJlyeagPoWWGKIvAhPDxjun33ZvCPPsKDJdRkSluaE6cszsCa2IP7srg56FespaWJA==
+
+"@react-native-firebase/messaging@^21.7.1":
+  version "21.7.1"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/messaging/-/messaging-21.7.1.tgz#826344d9cd0bb19743b985ae1fc023632f0d33c2"
+  integrity sha512-asLoTH/IZROTR/y82UpMqWGFly5TJf9Zvy+EqvgWMKhRWnAPxjC+UFHQeGwut95kg0zBj49H9F6yJ2gjdatOHg==
+
+"@react-native-google-signin/google-signin@^13.1.0":
+  version "13.1.0"
+  resolved "https://registry.yarnpkg.com/@react-native-google-signin/google-signin/-/google-signin-13.1.0.tgz#6482b89acf2ac88a6c68bc1304a265d5b7c3bb3a"
+  integrity sha512-C2/sqb0/s0c+Dwc/mykASZsRuHxGqn7SFrCxCY9D8p8IOQO05haInhCc7lzraJshRixGva5c/4usQZ71HMYSEQ==
+
 "@react-native/assets-registry@0.76.6":
   version "0.76.6"
   resolved "https://registry.yarnpkg.com/@react-native/assets-registry/-/assets-registry-0.76.6.tgz#649af8a19cbabcea321dbcfb1a1ae04bb298d958"

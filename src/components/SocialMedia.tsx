@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 
-const SocialMedia = () => {
+const SocialMedia = ({ onPress }) => {
   return (
     <View
       style={{
@@ -11,10 +11,12 @@ const SocialMedia = () => {
         alignItems: "center",
       }}
     >
-      <Image
-        style={styles.Imagestyle}
-        source={require("./../assets/SocialMediaIcons/google.png")}
-      />
+      <TouchableOpacity onPress={onPress}>
+        <Image
+          style={styles.Imagestyle}
+          source={require("./../assets/SocialMediaIcons/google.png")}
+        />
+      </TouchableOpacity>
       <Image
         style={(styles.Imagestyle, { height: 50, width: 50, marginTop: "5%" })}
         source={require("./../assets/SocialMediaIcons/twitter.png")}

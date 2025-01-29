@@ -7,17 +7,41 @@ import {
   Text,
   TouchableOpacity,
   Alert,
+  Button,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MyButtons from "../components/MyButtons";
 import MyTextInput from "../components/MyTextInput";
 import HomeScreen from "./HomeScreen";
 import SocialMedia from "../components/SocialMedia";
 import auth from "@react-native-firebase/auth";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        "648433459189-1mfekrno6i4oa2kosvipqqro8rmdobkv.apps.googleusercontent.com",
+    });
+  }, []);
+
+  async function onGoogleButtonPress() {
+    // Check if your device supports Google Play
+    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+    // Get the users ID token
+    const { data } = await GoogleSignin.signIn();
+    console.log(data);
+    Alert.alert("Login Successfully");
+
+    // Create a Google credential with the token
+    const googleCredential = auth.GoogleAuthProvider.credential(data.idToken);
+
+    // Sign-in the user with the credential
+    return auth().signInWithCredential(googleCredential);
+  }
 
   const LoginTestFn = () => {
     auth()
@@ -110,7 +134,7 @@ const LoginScreen = ({ navigation }) => {
           >
             OR
           </Text>
-          <SocialMedia />
+          <SocialMedia onPress={onGoogleButtonPress} />
         </View>
       </ImageBackground>
     </View>

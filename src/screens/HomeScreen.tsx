@@ -1,59 +1,39 @@
-import { Text, View, TouchableOpacity } from "react-native";
-import React from "react";
+import { Image, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import firestore from "@react-native-firebase/firestore";
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = () => {
+  const [dishData, setDishData] = useState({});
+  const getData = async () => {
+    const foodCollection = await firestore().collection("foods").get();
+    console.log(foodCollection.docs[0].data());
+    setDishData(foodCollection?.docs[0].data());
+  };
+
+  // useEffect(() => {
+  //   getData();
+  // });
+
+  useEffect(() => {
+    if (!dishData) {
+      getData();
+    }
+  }, [dishData]);
+
+  console.log("Image URL:", dishData?.image_url);
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#f5f5f5",
-      }}
-    >
-      <Text
-        style={{
-          fontSize: 24,
-          fontWeight: "bold",
-          color: "#333",
-          marginBottom: 10,
-        }}
-      >
-        Welcome to HomeScreen
-      </Text>
-      <Text
-        style={{
-          fontSize: 16,
-          color: "#666",
-          textAlign: "center",
-          marginBottom: 30,
-          paddingHorizontal: 20,
-        }}
-      >
-        This is the main page of your application.
-      </Text>
-
-      <TouchableOpacity
-        style={{
-          backgroundColor: "#4CAF50",
-          paddingVertical: 12,
-          paddingHorizontal: 25,
-          borderRadius: 8,
-        }}
-        // onPress={() => navigation.navigate("SignUpScreen")}
-      >
-        <Text
-          style={{
-            color: "#fff",
-            fontSize: 16,
-            fontWeight: "bold",
-          }}
-        >
-          Go to Sign Up
-        </Text>
-      </TouchableOpacity>
+    <View>
+      <Text>HomeScreen</Text>
+      <Text>{dishData?.title ?? "Loading title..."}</Text>
+      <Text>{dishData?.price ?? "Loading title..."}</Text>
+      <Image
+        source={{ uri: dishData.image_url }}
+        style={{ width: 100, height: 100 }}
+      />
     </View>
   );
 };
 
 export default HomeScreen;
+
+const styles = StyleSheet.create({});
