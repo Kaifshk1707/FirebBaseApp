@@ -1,14 +1,43 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
+import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
-const MyButtons = ({ title }) => {
+const MyButtons = ({ title, onPress }) => {
   return (
-    <TouchableOpacity>
-      <Text>{title}</Text>
+    <TouchableOpacity
+      style={{
+        height: 50,
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#ff0036",
+        borderRadius: 30,
+      }}
+      onPress={onPress}
+    >
+      <Text
+        style={{
+          color: "#ffffff",
+          fontSize: 20,
+          fontFamily: "NovaFlat-Regular",
+        }}
+      >
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };
 
-export default MyButtons;
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: "#6200EE",
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  text: {
+    color: "#FFFFFF",
+    fontSize: 16,
+  },
+});
 
-const styles = StyleSheet.create({});
+export default MyButtons;

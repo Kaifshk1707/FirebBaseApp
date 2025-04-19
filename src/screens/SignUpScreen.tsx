@@ -7,53 +7,34 @@ import {
   Text,
   TouchableOpacity,
   Alert,
-  Button,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import MyButtons from "../components/MyButtons";
 import MyTextInput from "../components/MyTextInput";
-import HomeScreen from "./HomeScreen";
 import SocialMedia from "../components/SocialMedia";
 import auth from "@react-native-firebase/auth";
-import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
-const LoginScreen = ({ navigation }) => {
+const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  useEffect(() => {
-    GoogleSignin.configure({
-      webClientId:
-        "648433459189-1mfekrno6i4oa2kosvipqqro8rmdobkv.apps.googleusercontent.com",
-    });
-  }, []);
-
-  async function onGoogleButtonPress() {
-    // Check if your device supports Google Play
-    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-    // Get the users ID token
-    const { data } = await GoogleSignin.signIn();
-    console.log(data);
-    Alert.alert("Login Successfully");
-
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(data.idToken);
-
-    // Sign-in the user with the credential
-    return auth().signInWithCredential(googleCredential);
-  }
-
-  const LoginTestFn = () => {
+  const signupTestFn = () => {
     auth()
-      .signInWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(email, password)
       .then((res) => {
         console.log(res);
-        Alert.alert("Success: logged in ");
-        navigation.navigate("HomeScreen");
+        Alert.alert(
+          "User created with those credentials Please login " + email
+        );
+        navigation.navigate("LoginScreen");
       })
       .catch((err) => {
-        console.log(err);
-        Alert.alert(err.nativeErrorMessage);
+        console.log("Error creating user:", err);
+        const errorMessage =
+          err?.nativeErrorMessage ||
+          "Enter a valid password. Please try again.";
+        Alert.alert("Signup Error", errorMessage);
       });
   };
 
@@ -107,6 +88,12 @@ const LoginScreen = ({ navigation }) => {
             placeholder="Password"
             secureTextEntry
           />
+          <MyTextInput
+            value={confirmPassword}
+            onChangeText={(text) => setConfirmPassword(text)}
+            placeholder="Confirm Password"
+            secureTextEntry
+          />
           <TouchableOpacity
             style={{ alignSelf: "flex-end" }}
             onPress={() => navigation.navigate("SignUpScreen")}
@@ -123,7 +110,12 @@ const LoginScreen = ({ navigation }) => {
               Don't have an account yet?
             </Text>
           </TouchableOpacity>
-          <MyButtons onPress={LoginTestFn} title={"Login"} />
+
+          <MyButtons
+            // onPress={() => navigation.navigate("LoginScreen")}
+            title={"Sign Up"}
+            onPress={signupTestFn}
+          />
           <Text
             style={{
               fontSize: 20,
@@ -134,13 +126,13 @@ const LoginScreen = ({ navigation }) => {
           >
             OR
           </Text>
-          <SocialMedia onPress={onGoogleButtonPress} />
+          <SocialMedia />
         </View>
       </ImageBackground>
     </View>
   );
 };
 
-export default LoginScreen;
+export default SignUpScreen;
 
 const styles = StyleSheet.create({});

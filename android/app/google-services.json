@@ -12,7 +12,20 @@
           "package_name": "com.anonymous.FirebBaseApp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "648433459189-oaoq5lr0afcjkfhgfr2vq06d847e6dt7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anonymous.FirebBaseApp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "648433459189-1mfekrno6i4oa2kosvipqqro8rmdobkv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBnik1K56vparRc9tokIZJtQvrlxej_lD8"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "648433459189-1mfekrno6i4oa2kosvipqqro8rmdobkv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
